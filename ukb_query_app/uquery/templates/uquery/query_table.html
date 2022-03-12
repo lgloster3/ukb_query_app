@@ -1,0 +1,22 @@
+
+{% extends 'uquery/base.html' %}
+
+{% block content %}
+
+<center>
+<h><strong>Query Table</strong></h>
+<br></br>
+<form action='' method ='GET'>
+    <input type='text', name='query' />
+    <input type="submit"/>
+</form>
+<br></br><br></br><br></br>
+{% for field in field_obj %}
+<a href="{% url 'query_table' %}">
+    {{field}}</a></br>
+{% endfor %}
+
+{{field_obj}}
+</center>
+
+{% endblock %}
