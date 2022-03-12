@@ -26,20 +26,20 @@ def query_builder(request):
     })
 
 def query_table(request):
-    # print(request.GET)
-    # query_dict = request.GET
-    # # # query = query_dict.get("name")  #<input type='text', name='query' />
-    # try:
-    #     query = int(query_dict.get("query"))
-    # except:
-    #     query = None
+    print(request.GET)
+    query_dict = request.GET
+    # # query = query_dict.get("name")  #<input type='text', name='query' />
+    try:
+        query = int(query_dict.get("query"))
+    except:
+        query = None
         
-    # field_obj = None
-    # if query is not None:
-    #     field_obj = Field.objects.all(field_id=query)
-    #     print(field_obj)
-    fields = Field.objects.filter()
-    print(fiel)
+    field_obj = None
+    if query is not None:
+        field_obj = Field.objects.filter(field_id=query)
+        print(field_obj)
+    # fields = Field.objects.filter(field_id=)
+    # print(fields)
     # if request.method == "GET":
     #     fieldID = request.GET["field_id"]
     # query = request.GET
@@ -47,6 +47,6 @@ def query_table(request):
     # field_obj = Field.objects.get(field_id=query_req)
     # print(field_obj)
     return render(request,'uquery/query_table.html',{
-        "object": field_obj
+        "field_obj": field_obj
 
     })
