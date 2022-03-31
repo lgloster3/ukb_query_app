@@ -3,21 +3,48 @@
 {% block content %}
 
 <center>
-<h1>Build Query</h1>
-<br></br>
-{% if submitted %}
-Your Query was submitted successfully
-{% else %}
+<div class="row">
+    <div class="col-md">
+        <h5>Query Build</h5>
+    </div>
+    <div>
+    <form method="get">
+        {{myfilter.form}}
+        <button class="btn btn-primary" type="submit">
+            Search
+        </button>
+    </form>
+    </div>
+    <div class="card card-body">
+        <div class panel panel-default>
+    
+        </div>
+        <table class="table table-hover table-bordered table-condensed" style="line-height: 1.0;">
+            <thead>
+              <tr>
+                    <th scope="col" witdth="10%">Select</th>
+                    <th scope="col" width="10%">Field_ID</th>
+                    <th scope="col" width="40%">Title</th>
+                    <th scope="col">Instance_ID</th>
+                    <th scope="col">Encoding_ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for i in fields %}
+                <tr>
+                    <th scope="col"><input type="checkbox" /></th>
+                    <td>{{i.field_id}}</td>
+                    <td>{{i.title}}</td>
+                    <td>{{i.instance_id}}</td>
+                    <td>{{i.encoding_id}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
 
-
-    <form action="" method=POST>
-        {% csrf_token %}
-
-        {{form.as_p}}
-
-        <input type ="submit" value="Submit" class="btn btn-secondary">
-</form>
-{% endif %}
+    </div>
+</div>
 </center>
 
 {% endblock %}

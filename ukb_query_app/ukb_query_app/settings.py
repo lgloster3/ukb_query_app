@@ -37,8 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'uquery',
+    'uquery.apps.UqueryConfig',
+    'rest_framework',
+    'frontend.apps.FrontendConfig'
 ]
+
+REST_FRAMEWORK = {
+'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework.authentication.SessionAuthentication',
+),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +63,7 @@ ROOT_URLCONF = 'ukb_query_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['C:\\Users\\Logan\Desktop\\ukb_query_app\\ukb_query_app\\ukb_query_app\\uquery\\templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

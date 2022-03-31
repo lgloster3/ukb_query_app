@@ -13,6 +13,9 @@ class Ehierint(models.Model):
     class Meta:
         managed = False
         db_table = 'ehierint'
+    
+    def __str__(self):
+        return self.meaning
 
 
 class Ehierstring(models.Model):
@@ -119,6 +122,8 @@ class Field(models.Model):
         managed = False
         db_table = 'field'
 
+    # def __str__(self):
+    #     return self.version.values()
 
 class Fieldsum(models.Model):
     title = models.CharField(max_length=1000)
@@ -177,3 +182,19 @@ class RecordTable(models.Model):
     class Meta:
         managed = False
         db_table = 'record_table'
+class Ukb37912(models.Model):
+    data = models.JSONField()  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'ukb37912'
+    
+
+
+class TestDb(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    
+    class Meta:
+        managed = False
+        db_table = 'uquery_testdb'
