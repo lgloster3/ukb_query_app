@@ -1,50 +1,104 @@
 {% extends 'uquery/base.html' %}
 
 {% block content %}
-
+<style>
+    .tableContainer {
+        height: 400px;
+        overflow-y: auto;
+    }
+    .tableContainer thead {
+        position: sticky;
+        top: 0;
+        z-index:0;
+        width: 100%;
+        height: 40px;
+        background: #E2E2E2;
+    }
+    .tableBorder {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    .container{overflow: hidden}
+    .tab{float: left}
+    .tab-btn{margin: 50px;}
+    button{display:block;margin-bottom: 20px;}
+    tr{transition:all .25s ease-in-out}
+    tr:hover{background-color: #ddd;}
+</style>
 <center>
 <div class="row">
     <div class="col-md">
-        <h5>Query Build</h5>
+        <h2>Query Build</h2><br />
     </div>
     <div>
-    <form method="get">
+    <form id="filteredField" method="get">
         {{myfilter.form}}
         <button class="btn btn-primary" type="submit">
             Search
         </button>
     </form>
     </div>
+
     <div class="card card-body">
         <div class panel panel-default>
-    
+            <div class="tableContainer">
+                <table id="queryTable" class="table table-hover table-bordered" style="line-height: 1.0;">
+                    <thead>
+                      <tr>
+                            
+                            <th scope="col">Field_ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Instance_ID</th>
+                            <th scope="col">Encoding_ID</th>
+                            <th scope="col">Add</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        {% for i in fields %}
+                        <tr>
+                            
+                            <td>{{i.fieldfk}}</td>
+                            <td>{{i.title}}</td>
+                            <td>{{i.instnace_id}}</td>
+                            <td>{{i.encoding}}</td>
+                            <td>
+                                <div class="tab tab-btn">
+                                    <button onclick="tab1_To_tab2();">Add</button>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
         </div>
-        <table class="table table-hover table-bordered table-condensed" style="line-height: 1.0;">
-            <thead>
-              <tr>
-                    <th scope="col" witdth="10%">Select</th>
-                    <th scope="col" width="10%">Field_ID</th>
-                    <th scope="col" width="40%">Title</th>
-                    <th scope="col">Instance_ID</th>
-                    <th scope="col">Encoding_ID</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {% for i in fields %}
-                <tr>
-                    <th scope="col"><input type="checkbox" /></th>
-                    <td>{{i.field_id}}</td>
-                    <td>{{i.title}}</td>
-                    <td>{{i.instance_id}}</td>
-                    <td>{{i.encoding_id}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-          </table>
-
     </div>
 </div>
+<br/><br/>
+<table id="queryList" class="table tableBorder table-hover table-bordered" style="line-height: 1.0;">
+    <tbody>
+        <thead>
+            <tr>
+                  
+                  <th scope="col">Field_ID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Instance_ID</th>
+                  <th scope="col">Encoding_ID</th>
+                  <th scope="col">Remove</th>
+            </tr>
+          </thead>
+    </tbody>
+</table>
+<button id="ohe" class="btn btn-primary" type="submit">
+    One-Hot Encode
+</button>
+
+<script>
+  
+</script>
+
 </center>
 
 {% endblock %}

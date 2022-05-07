@@ -6,14 +6,14 @@ from . models import Field
 class FieldForm(ModelForm):
     class Meta:
         model = Field
-        fields = ('field_id','instance_id')
+        fields = ('field_num','instance_id')
         labels = {
-            'field_id': '',
+            'field_num': '',
             'instance_id': '',
             
         }
         widgets ={
-            'field_id': forms.TextInput(attrs={'class':'form-control','placeholder':'Field Number'}),
+            'field_num': forms.TextInput(attrs={'class':'form-control','placeholder':'Field Number'}),
             'instance_id': forms.TextInput(attrs={'class':'form-control','placeholder':'Assessment Visit Number'}),
 
         }

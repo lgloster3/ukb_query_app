@@ -38,14 +38,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'uquery.apps.UqueryConfig',
-    'rest_framework',
-    'frontend.apps.FrontendConfig'
+    'rest_framework', 
+    'frontend.apps.FrontendConfig',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
 'DEFAULT_AUTHENTICATION_CLASSES': (
     'rest_framework.authentication.SessionAuthentication',
 ),
+ 'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser'
+     ),
+'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
 }
 
 MIDDLEWARE = [
@@ -56,7 +65,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'ukb_query_app.urls'
 
@@ -89,8 +101,9 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": 'Beta',
         'HOST':'localhost',
-        'PORT':"5432"
-        ""
+        'PORT':"5432",
+        
+        
     }
 }
 
@@ -130,6 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = ['C:\\Users\\Logan\Desktop\\ukb_query_app\\ukb_query_app\\ukb_query_app\\uquery\\static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

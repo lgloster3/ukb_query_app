@@ -6,4 +6,4 @@ class FieldFilter(django_filters.FilterSet):
     titleFilter = CharFilter(field_name="title",lookup_expr="icontains")
     class Meta:
         model = Field
-        fields = ['field_id',"instance_id","encoding_id"]
+        fields = ['field_num','title','instance_id','encoding']

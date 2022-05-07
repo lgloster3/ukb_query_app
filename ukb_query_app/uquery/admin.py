@@ -8,5 +8,5 @@ from . models import Field
 @admin.register(Field)
 class FieldAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Field._meta.get_fields()]
-    ordering = ('field_id',)
-    search_fields = ('field_id','title')
+    ordering = ('field_num',)
+    search_fields = ('field_num','title')

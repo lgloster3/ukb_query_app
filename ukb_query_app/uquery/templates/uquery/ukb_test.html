@@ -1,129 +1,172 @@
+
+
 {% extends 'uquery/base.html' %}
+
 {% block content %}
-<table border="1" class="dataframe table table-bordered table-striped table-hover">
-  <thead>
-    <tr style="text-align: left;">
-      <th></th>
-      <th>id_4</th>
-      <th>id_214</th>
-      <th>id_414</th>
-      <th>id_540</th>
-      <th>id_771</th>
-      <th>f.eid_2053931</th>
-      <th>f.eid_2172206</th>
-      <th>f.eid_4147963</th>
-      <th>f.eid_5337694</th>
-      <th>f.eid_5457264</th>
-      <th>Field_87</th>
-      <th>Index_1</th>
-      <th>Value_2002</th>
-      <th>Value_2004</th>
-      <th>Value_2006</th>
-      <th>Value_2012</th>
-      <th>Assessment_1</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
+{% autoescape on %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TABLE TEST</title>
+</head>
+<style>
+    .container{overflow: auto}
+    tr{transition:all .25s ease-in-out}
+</style>
+<body>
+    <div class="container">
+            ADD TABLE
+            <table id="table1" class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Field_num</th>
+                        <th>Title</th>
+                        <th>Instance_ID</th>
+                        <th>Encoding</th>
+                        <th>Value_Type</th>
+                        <th>Add Field</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for elem in df %}
+                    <tr>
+                        <td>{{elem.field_num}}</td>
+                        <td>{{elem.title}}</td>
+                        <td>{{elem.instance_id}}</td>
+                        <td>{{elem.encoding}}</td>
+                        <td>{{elem.value_type}}</td>
+                        <td>
+                            <div class="tab tab-btn">
+                                <button onclick="tab1_To_tab2(this);">Add</button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+        REMOVE TABLE
+        <table id="table2" class="table table-hover table-bordered">
+            <thead>
+                <th>field_num</th>
+                <th>title</th>
+                <th>instance_id</th>
+                <th>encoding</th>
+                <th>value_type</th>
+                <th>Remove Field</th>
+            </thead>
+        </table>
+    </div>
+
+    <button input="Submit" onclick="tableJSON()" name="Submit">Submit</button>
+    
+</body>
+
+<script>
+    //add from table1 to table2
+    function tab1_To_tab2(buttonCell){
+
+        //getting index row button is on
+        var rowIdx = buttonCell.parentNode.parentNode.parentNode.rowIndex;
+
+        //getting tables vars by id
+        var table1 = document.getElementById('table1');
+        var table2 = document.getElementById('table2');
+
+        //get table1 cells
+        var table1Cells = document.getElementById('table1').rows[rowIdx].cells;
+
+        //insert row at end of rows
+        var newRow = table2.insertRow(-1);
+        //using len of cells, add new cell in same position in table2
+        for(var i =0; i<table1Cells.length;i++)
+        if(i < 5){
+            cell = newRow.insertCell(i);
+            cell.innerHTML = table1Cells[i].innerHTML;
+        }
+        else {
+            cell = newRow.insertCell(i);
+            cell.innerHTML = "<div class='tab tab-btn'><button onclick='tab2_To_tab1(this);''>Remove</button></div>";
+        }
+        
+        //remove transferred rows
+        var index = table1.rows[rowIdx].rowIndex;
+        table1.deleteRow(index);
+        i--;
+    }
+    //remove from table2; add to table1
+    function tab2_To_tab1(buttonCell){
+        //getting index row button is on
+        var rowIdx = buttonCell.parentNode.parentNode.parentNode.rowIndex,
+            //getting cell data by index row
+            table2Cells = document.getElementById('table2').rows[rowIdx].cells,
+            table1 = document.getElementById('table1'),
+            table2 = document.getElementById('table2');
+
+        var newRow = table1.insertRow(-1);
+        
+        for(var i =0; i<table2Cells.length;i++)
+        if(i < 5){
+            cell = newRow.insertCell(i);
+            cell.innerHTML = table2Cells[i].innerHTML;
+        }
+        else {
+            cell = newRow.insertCell(i);
+            cell.innerHTML = "<div class='tab tab-btn'><button onclick='tab1_To_tab2(this);''>Add</button></div>";
+        }
+         //remove transferred rows
+        var index = table2.rows[rowIdx].rowIndex;
+        table2.deleteRow(index);
+        i--;
+    }
+    
+    function tableToJSON() {
+        var table = document.getElementById("table2")
+        var obj = [];
+        var dict = {};
+        var rows = table.rows;
+        for (var i=1, iLen=rows.length; i<iLen; i++) {
+            for (var e=0, eLen=rows[i].cells.length; e<eLen; e++) {
+                if(e!=5){
+                    dict[rows[0].cells[e].textContent] = rows[i].cells[e].textContent
+                }
+            }
+            obj.push(dict);
+            console.log(obj)
+            console.log(dict)
+            dict = {};
+        }
+        return obj;
+        }
+
+ 
+    async function tableJSON() {
+        const data = tableToJSON();
+        console.log(data)
+        console.log(JSON.stringify(data))
+        const response = await fetch('{% url "ukb_test" %}', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            response.text()
+        })
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+   
+</script>
+</html>
+{% endautoescape %}
 {% endblock %}
